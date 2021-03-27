@@ -1,4 +1,5 @@
-import { CategoriesRepository } from "../repositories/CategoriesRepository";
+import { Specification } from "../model/Specification";
+import { ISpecificationsRepository } from "../repositories/ISpecificationsRepository";
 
 type IRequest = {
   name: string
@@ -6,13 +7,13 @@ type IRequest = {
 }
 
 export class CreateSpecificationService {
-  constructor(private specificationsRepository: CategoriesRepository) { }
+  constructor(private specificationsRepository: ISpecificationsRepository) { }
 
-  execute({ description, name }: IRequest): void {
+  execute({ description, name }: IRequest): Specification {
     const categoryAlreadyExists = this.specificationsRepository.findByName(name)
 
     if (categoryAlreadyExists) throw new Error("Category already exists")
 
-    this.specificationsRepository.create({ name, description })
+    return this.specificationsRepository.create({ name, description })
   }
 }

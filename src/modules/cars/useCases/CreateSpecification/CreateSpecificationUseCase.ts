@@ -1,12 +1,12 @@
-import { Specification } from "../model/Specification";
-import { ISpecificationsRepository } from "../repositories/ISpecificationsRepository";
+import { Specification } from "../../model/Specification";
+import { ISpecificationsRepository } from "../../repositories/ISpecificationsRepository";
 
 type IRequest = {
   name: string
   description: string
 }
 
-export class CreateSpecificationService {
+export class CreateSpecificationUseCase {
   constructor(private specificationsRepository: ISpecificationsRepository) { }
 
   execute({ description, name }: IRequest): Specification {
